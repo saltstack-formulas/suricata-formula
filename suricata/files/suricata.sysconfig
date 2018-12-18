@@ -1,0 +1,13 @@
+{%- from "suricata/map.jinja" import host_lookup as config with context -%}
+# The following parameters are the most commonly needed to configure
+# suricata. A full list can be seen by running /sbin/suricata --help
+# -i <network interface device>
+# --user <acct name>
+# --group <group name>
+
+# Add options to be passed to the daemon
+{%- if config.suricata.use_pfring == 'True' %}
+OPTIONS="--pf_ring={{ config.suricata.interfaces.capture.device_names }} --user {{ config.suricata.user }}"
+{%- else %}
+OPTIONS="-i {{ config.suricata.interfaces.capture.device_names }} --user {{ config.suricata.user }}"
+{%- endif %}

@@ -1,0 +1,84 @@
+# Default setting for base_dir
+{% set base_dir = salt['pillar.get']('suricata:lookup:suricata:base_dir', '/etc/suricata') %}
+
+# Set default suricata settings
+{% set default_config = salt.grains.filter_by({
+  'default':
+  {
+    'suricata':
+    {
+      'base_dir': base_dir,
+      'default_log_dir': '/var/log/suricata',
+      'python_pyyaml_pkg': 'python34-PyYAML',
+      'python_pip_pkg': 'python34-pip',
+      'python_pip_cmd': 'pip3',
+      'mode': 'ids',
+      'use_pfring': 'False',
+      'pfring_lb_procs': '1',
+      'user': 'suricata',
+      'classification_file': base_dir + '/classification.config',
+      'reference_config_file': base_dir + '/reference.config',
+      'config_path': base_dir + '/suricata.yaml',
+      'startup_overrides_path': '/etc/sysconfig/suricata',
+      'address_groups':
+      {
+        'HOME_NET':'192.168.0.0/16,10.0.0.0/8,172.16.0.0/12',
+        'EXTERNAL_NET':'!$HOME_NET'
+      },
+      'use_suricata_update': 'True',
+      'use_suricata_update_cron': 'True',
+      'suricata_update_config': base_dir + '/update.yaml',
+      'rules_path': '/var/lib/suricata/rules',
+      'update_path': '/var/lib/suricata/update',
+      'rules_file': 'suricata.rules',
+      'reload_command': 'suricatasc -c reload-rules',
+      'disable_conf': base_dir + '/disable.conf',
+      'enable_conf': base_dir + '/enable.conf',
+      'drop_conf': base_dir + '/drop.conf',
+      'modify_conf': base_dir + '/modify.conf',
+      'threshold_file': base_dir + '/threshold.config',
+      'remote_rule_sources':
+      [
+        'https://rules.emergingthreats.net/open/suricata-%(__version__)s/emerging.rules.tar.gz',
+        'https://sslbl.abuse.ch/blacklist/sslblacklist.rules'
+      ],
+      'local_rule_files':
+      [
+        '/etc/suricata/rules'
+      ],
+      'ignore_rule_files':
+      [
+        '*deleted.rules',
+        'dnp3-events.rules',
+        'modbus-events.rules',
+        'ntp.rules',
+        'smtp-events.rules'
+      ],
+      'stats':
+      {
+        'enable_global_stats': 'yes',
+        'global_stats_interval': '8'
+      },
+      'bpf':
+      {
+        'use_BPFconf': 'True',
+        'bpf_rules': [],
+      },
+      'interfaces':
+      {
+        'ip_binary_path': '/sbin/ip',
+        'management': 'ens192',
+        'capture': 
+        {
+          'device_names': 'ens224',
+          'enable_tx': '0',
+          'min_num_slots': '4096',
+          'cluster_type': 'cluster_flow'
+        }
+      }
+    }
+  }
+}, grain='host', base='default') %}
+
+# Merge the default settings with pillar data
+{% set host_lookup = salt['pillar.get']('suricata:lookup', default=default_config, merge=True) %}

@@ -1,0 +1,54 @@
+# suricata docs https://suricata.readthedocs.io/en/latest/
+suricata:
+  lookup:
+    suricata:
+      base_dir: '/etc/suricata'                        # /etc/suricata is default for package install
+      default_log_dir: '/var/log/suricata'             # Default log directory
+      python_pyyaml_pkg: 'python34-PyYAML'             # Required packages for suricata-update install if using versions of suricata prior to v4.1
+      python_pip_pkg: 'python34-pip'                   # Can be pip or pip3 but only is installed if use_suricata_update == True and suri ver < v4.1
+      python_pip_cmd: 'pip3'                           # Otherwise, the pip install is skipped and suricata-update can still manage rule updates
+      mode: 'ids'                                      # Set IDS or IPS (only IDS for now)
+      use_pfring: 'False'                                   # If pf_ring is installed set this to True
+      pfring_lb_procs: '2'                                  # Number of processors to run suricata workers with
+      user: 'suricata'                                      # User to run suricata as
+      startup_overrides_path: '/etc/sysconfig/suricata'     # System overrides /etc/sysconfig or /etc/defaults depending on OS
+      address_groups:                                       # Set defaults for address groups
+        HOME_NET: '192.168.0.0/16,10.0.0.0/8,172.16.0.0/12' 
+        EXTERNAL_NET: '!$HOME_NET'
+      use_suricata_update: 'True'                           # If using suricata-update for rule management
+      use_suricata_update_cron: 'True'                      # If using suricata-update set cron to run daily
+      suricata_update_config: '/etc/suricata/update.yaml'   # Local path for suricata-update config
+      update_path: '/var/lib/suricata/update'               # Local path for suricata-update cache
+      rules_path: '/var/lib/suricata/rules'                 # Local path for consolidated rule file
+      rules_file: 'suricata.rules'                          # Consolidated file for all rules
+      reload_command: 'suricatasc -c reload-rules'          # Reload command to run upon successful rule download
+      #disable_conf: base_dir + '/disable.conf'             # File for disable rules
+      #enable_conf: base_dir + '/enable.conf'               # File for enable rules
+      #drop_conf: base_dir + '/drop.conf'                   # File for drop rules
+      #modify_conf: base_dir + '/modify.conf'               # File for modify rules
+      #threshold_file: base_dir + '/threshold.config'       # File for threshold rules
+      remote_rule_sources:                                  # List of remote rule sources (check update.yaml for examples)
+        - 'https://rules.emergingthreats.net/open/suricata-%(__version__)s/emerging.rules.tar.gz'
+        - 'https://sslbl.abuse.ch/blacklist/sslblacklist.rules'
+      local_rule_files:                                     # List of local rule paths (check update.yaml for examples)
+        - '/etc/suricata/rules'
+      ignore_rule_files:                                    # List of rules files to ignore
+        - '*deleted.rules'
+        - 'dnp3-events.rules'
+        - 'modbus-events.rules'
+        - 'ntp.rules'
+        - 'smtp-events.rules'
+      stats:
+        enable_global_stats: 'yes'           # Enabled global stats
+        global_stats_interval: '8'           # Interval in seconds to capture device stats
+      bpf:
+        use_BPFconf: 'False'                 # Use Berkeley Packet Filter(BPF) on capture interfaces
+        bpf_rules: []                        # Add custom BPF rules
+      interfaces:
+        ip_binary_path: '/sbin/ip'           # path to ip binary for managing 
+        management: 'ens192'                 # Management interface name
+        capture: 
+          device_names: 'ens224'             # Capture interface name (currently only supports 1 interface)
+          enable_tx: '0'                     # Enable tx send on this interface (default is 0)
+          min_num_slots: '4096'              # Min Slots check support on card using ethtool -g eth1
+          cluster_type: 'cluster_flow'       # Flow type used for af_packet or pf_ring setups (Recommended is cluster_flow)
