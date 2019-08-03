@@ -5,3 +5,4 @@ include:
   - .suri-service
   - .suri-rules
   - .suri-cron
+  - .suri-logrotate

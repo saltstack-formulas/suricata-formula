@@ -8,6 +8,8 @@
     'suricata':
     {
       'base_dir': base_dir,
+      'use_logrotate': 'True',
+      'logrotate_config': '/etc/logrotate.d/suricata',
       'default_log_dir': '/var/log/suricata',
       'python_pyyaml_pkg': 'python34-PyYAML',
       'python_pip_pkg': 'python34-pip',
@@ -16,6 +18,7 @@
       'use_pfring': 'False',
       'pfring_lb_procs': '1',
       'user': 'suricata',
+      'group': 'suricata',
       'classification_file': base_dir + '/classification.config',
       'reference_config_file': base_dir + '/reference.config',
       'config_path': base_dir + '/suricata.yaml',
