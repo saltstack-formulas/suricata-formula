@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# vim: ft=sls
+
 include:
   - .suri-prereqs
   - .suri-package

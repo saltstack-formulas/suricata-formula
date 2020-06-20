@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
 # Default setting for base_dir
 {% set base_dir = salt['pillar.get']('suricata:lookup:suricata:base_dir', '/etc/suricata') %}
 
@@ -11,17 +14,18 @@
       'use_logrotate': 'True',
       'logrotate_config': '/etc/logrotate.d/suricata',
       'default_log_dir': '/var/log/suricata',
-      'python_pyyaml_pkg': 'python34-PyYAML',
-      'python_pip_pkg': 'python34-pip',
-      'python_pip_cmd': 'pip3',
-      'mode': 'ids',
+      'python_pyyaml_pkg': 'PyYAML',
+      'python_pip_cmd': 'python3 -m pip',
+      'mode': 'af-packet',
       'use_pfring': 'False',
       'pfring_lb_procs': '1',
       'user': 'suricata',
       'group': 'suricata',
-      'classification_file': base_dir + '/classification.config',
-      'reference_config_file': base_dir + '/reference.config',
-      'config_path': base_dir + '/suricata.yaml',
+      'service_file': '',
+      'classification_file': 'classification.config',
+      'reference_config_file': 'reference.config',
+      'config_file': 'suricata.yaml',
+      'config_version': 'v41',
       'startup_overrides_path': '/etc/sysconfig/suricata',
       'address_groups':
       {
@@ -30,16 +34,16 @@
       },
       'use_suricata_update': 'True',
       'use_suricata_update_cron': 'True',
-      'suricata_update_config': base_dir + '/update.yaml',
+      'update_config': 'suricata-update.yaml',
       'rules_path': '/var/lib/suricata/rules',
       'update_path': '/var/lib/suricata/update',
       'rules_file': 'suricata.rules',
       'reload_command': 'suricatasc -c reload-rules',
-      'disable_conf': base_dir + '/disable.conf',
-      'enable_conf': base_dir + '/enable.conf',
-      'drop_conf': base_dir + '/drop.conf',
-      'modify_conf': base_dir + '/modify.conf',
-      'threshold_file': base_dir + '/threshold.config',
+      'disable_conf': 'disable.conf',
+      'enable_conf': 'enable.conf',
+      'drop_conf': 'drop.conf',
+      'modify_conf': 'modify.conf',
+      'threshold_file': 'threshold.config',
       'remote_rule_sources':
       [
         'https://rules.emergingthreats.net/open/suricata-%(__version__)s/emerging.rules.tar.gz',
@@ -65,7 +69,7 @@
       'bpf':
       {
         'use_BPFconf': 'True',
-        'bpf_rules': [],
+        'bpf_rules_file': 'capture-filter.bpf'
       },
       'interfaces':
       {
@@ -73,6 +77,7 @@
         'management': 'ens192',
         'capture': 
         {
+          'enable': 'True',
           'device_names': 'ens224',
           'enable_tx': '0',
           'min_num_slots': '4096',

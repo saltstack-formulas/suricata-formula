@@ -1,0 +1,39 @@
+{%- from "suricata/map.jinja" import host_lookup as config with context -%}
+# Default config for Suricata
+
+# set to yes to start the server in the init.d script
+RUN=yes
+
+# Drop privs to run as defined suricata user
+RUN_AS_USER={{ config.suricata.user }}
+
+# Configuration file to load
+SURCONF={{ config.suricata.base_dir }}/{{ config.suricata.config_file }}
+
+# Listen mode: pcap, nfqueue, custom_nfqueue or af-packet
+# depending on this value, only one of the two following options
+# will be used (af-packet uses neither).
+# Please note that IPS mode is only available when using nfqueue
+LISTENMODE={{ config.suricata.mode }}
+
+# Interface to listen on (for pcap mode)
+IFACE={{ config.suricata.interfaces.capture.device_names }}
+
+# Queue number to listen on (for nfqueue mode)
+NFQUEUE="-q 0"
+
+# Queue numbers to listen on (for custom_nfqueue mode)
+# Multiple queues can be specified
+CUSTOM_NFQUEUE="-q 0 -q 1 -q 2 -q 3"
+
+# Load Google TCMALLOC if libtcmalloc-minimal4 is installed
+# This _might_ give you very very small performance gain....
+TCMALLOC="YES"
+
+# Pid file
+PIDFILE=/var/run/suricata.pid
+
+{%- if config.suricata.bpf.use_BPFconf == 'True' -%}
+# Add option to use BPF config file
+BPF_CONFIG={{ config.suricata.base_dir }}/{{ config.suricata.bpf_rules_file }}
+{% endif -%}

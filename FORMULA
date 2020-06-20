@@ -1,0 +1,9 @@
+name: suricata
+os: Ubuntu 18.04, CentOS7/8
+os_family: Debian, RedHat
+version: 1.0.0
+release: 1
+minimum_version: 2019.2
+summary: suricata formula
+description: Formula to install Suricata IDS
+top_level_dir: suricata

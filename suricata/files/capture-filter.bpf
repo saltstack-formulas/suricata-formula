@@ -1,0 +1,19 @@
+# Supports a single capture-filter.bpf file that applies to all capture interfaces.
+# Suricata will need to restart in order to process newly created rules.
+# http://biot.com/capstats/bpf.html for example bpf syntax
+#
+# Example bpf rules:
+# Drop from src host to dst port
+# !(src host 192.168.1.35 && dst port 161) &&
+#
+# Drop from src host to dst host and dst port
+# !(src host 10.10.0.210 && dst host 10.10.0.200 && dst port 80) &&
+#
+# Drop to or from:
+# !(host 8.8.8.8) &&
+#
+# Notice the last rule has no &&
+# !(host 8.8.4.4)
+
+# Drop AWS metada service traffic
+# !(ip host 169.254.169.254 && port 80)

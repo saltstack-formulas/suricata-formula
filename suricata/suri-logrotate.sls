@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# vim: ft=sls
+
 {% from "suricata/map.jinja" import host_lookup as config with context %}
 {% if config.suricata.use_logrotate == 'True' %}
 

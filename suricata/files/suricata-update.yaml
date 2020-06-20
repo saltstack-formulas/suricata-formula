@@ -2,22 +2,22 @@
 # Configuration with disable filters.
 # - Overrided by --disable-conf
 # - Default: /etc/suricata/disable.conf
-disable-conf: {{ config.suricata.disable_conf }}
+disable-conf: {{ config.suricata.base_dir }}/{{ config.suricata.disable_conf }}
 
 # Configuration with enable filters.
 # - Overrided by --enable-conf
 # - Default: /etc/suricata/enable.conf
-enable-conf: {{ config.suricata.enable_conf }}
+enable-conf: {{ config.suricata.base_dir }}/{{ config.suricata.enable_conf }}
 
 # Configuration with drop filters.
 # - Overrided by --drop-conf
 # - Default: /etc/suricata/drop.conf
-drop-conf: {{ config.suricata.drop_conf }}
+drop-conf: {{ config.suricata.base_dir }}/{{ config.suricata.drop_conf }}
 
 # Configuration with modify filters.
 # - Overrided by --modify-conf
 # - Default: /etc/suricata/modify.conf
-modify-conf: {{ config.suricata.modify_conf }}
+modify-conf: {{ config.suricata.base_dir }}/{{ config.suricata.modify_conf }}
 
 # Override the user-agent string.
 #user-agent: "Suricata-Update"

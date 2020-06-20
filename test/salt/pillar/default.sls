@@ -10,7 +10,7 @@ suricata:
     {% if grains['os_family'] == 'RedHat' %}
      {% if grains['osmajorrelease'] == 7 %}
       python_pyyaml_pkg: 'PyYAML'                      # PyYAML package for suricata-update. Install PyYAML(7), python3-pyyaml(8) for RHEL based OS 
-      config_version: 'v41'                            # Sets config file version to use for v4x or v5x based on defaults for OS
+      config_version: 'v41'                            # Sets config file version to use for v4.1.x or v5.0.x based on defaults for OS
      {% elif grains['osmajorrelease'] == 8 %}
       python_pyyaml_pkg: 'python3-pyyaml'              # PyYAML package for suricata-update. Install PyYAML(7), python3-pyyaml(8) for RHEL based OS 
       config_version: 'v50'                            # Sets config file version to use for v4x or v5x based on defaults for OS
@@ -27,7 +27,7 @@ suricata:
       user: 'suricata'                                      # Default user to run suricata as on RHEL based OS
       startup_overrides_path: '/etc/sysconfig/suricata'     # System overrides /etc/sysconfig or /etc/defaults depending on OS
     {% elif grains['os_family'] == 'Debian' %}
-      user: 'root'                                          # Default user to run suricata as on Debian based OS
+      user: 'suricata'                                      # Default user to run suricata as on Debian based OS
       startup_overrides_path: '/etc/default/suricata'       # System overrides /etc/sysconfig or /etc/defaults depending on OS
       service_file: 'suricata.init'                         # Using the oisf ppa requires some mods to the init file for setup
     {% endif %}
@@ -59,17 +59,17 @@ suricata:
         - 'ntp.rules'
         - 'smtp-events.rules'
       stats:
-        enable_global_stats: 'yes'             # Enabled global stats
-        global_stats_interval: '8'             # Interval in seconds to capture device stats
+        enable_global_stats: 'yes'           # Enabled global stats
+        global_stats_interval: '8'           # Interval in seconds to capture device stats
       bpf:
-        use_BPFconf: 'False'                   # Use Berkeley Packet Filter(BPF) on capture interfaces
-        bpf_rules_file: 'capture-filter.bpf'   # Add custom BPF rules
+        use_BPFconf: 'False'                 # Use Berkeley Packet Filter(BPF) on capture interfaces
+        bpf_rules_file: 'capture-filter.bpf' # Add custom BPF rules
       interfaces:
-        ip_binary_path: '/sbin/ip'             # path to ip binary for managing 
-        management: 'eth0'                     # Management interface name
+        ip_binary_path: '/sbin/ip'           # path to ip binary for managing 
+        management: 'eth0'                   # Management interface name
         capture: 
-          enable: 'True'
-          device_names: 'eth1'               # Capture interface name (currently only supports 1 interface)
+          enable: 'False'                    # Set to false for docker container
+          device_names: 'eth0'               # Capture interface name (currently only supports 1 interface)
           enable_tx: '0'                     # Enable tx send on this interface (default is 0)
           min_num_slots: '4096'              # Min Slots check support on card using ethtool -g eth1
           cluster_type: 'cluster_flow'       # Flow type used for af_packet or pf_ring setups (Recommended is cluster_flow)

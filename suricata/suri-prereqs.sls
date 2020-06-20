@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# vim: ft=sls
+
 {% from "suricata/map.jinja" import host_lookup as config with context %}
 
 # Install epel for RHEL based systems
@@ -24,6 +27,17 @@ package-install-prereqs-suricata:
     - pkgs:
        - curl
        - gawk
+       - libtcmalloc-minimal4
+       - software-properties-common
     - refresh: True
+
+# Add the suricata ppa
+command-add-suricata-ppa:
+  cmd.run:
+    - name: add-apt-repository ppa:oisf/suricata-stable -y
+    - unless: grep -r suricata /etc/apt/sources.list.d/
+    - require:
+      - pkg: package-install-prereqs-suricata
+
 {% endif %} # End RedHat/Debian
 
