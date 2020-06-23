@@ -17,6 +17,17 @@ platforms:
     driver:
       image: saltimages/salt-master-py3:centos-8
 
+  ## SALT '3001'
+  - name: ubuntu-1804-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:ubuntu-18.04
+  - name: centos-8-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:centos-8
+  - name: centos-7-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:centos-7
+
   ## SALT `3000.3`
   - name: ubuntu-1804-3000-3-py3
     driver:
