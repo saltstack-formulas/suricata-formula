@@ -1,4 +1,6 @@
-#Override by OS
+# frozen_string_literal: true
+
+# Override by OS
 if os.family == 'debian'
   file_name = '/etc/suricata/suricata.yaml'
   user = 'suricata'
