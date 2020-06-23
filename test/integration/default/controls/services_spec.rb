@@ -1,4 +1,6 @@
-# Overide by OS
+# frozen_string_literal: true
+
+# Override by OS
 service_name = 'suricata'
 
 control 'suricata service' do

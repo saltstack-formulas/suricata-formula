@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
-
+---
 # suricata docs https://suricata.readthedocs.io/en/latest/
 suricata:
   lookup:
@@ -9,10 +9,10 @@ suricata:
       default_log_dir: '/var/log/suricata'             # Default log directory
     {% if grains['os_family'] == 'RedHat' %}
      {% if grains['osmajorrelease'] == 7 %}
-      python_pyyaml_pkg: 'PyYAML'                      # PyYAML package for suricata-update. Install PyYAML(7), python3-pyyaml(8) for RHEL based OS 
+      python_pyyaml_pkg: 'PyYAML'                      # PyYAML package for suricata-update. Install PyYAML(7), python3-pyyaml(8) for RHEL based OS
       config_version: 'v41'                            # Sets config file version to use for v4x or v5x based on defaults for OS
      {% elif grains['osmajorrelease'] == 8 %}
-      python_pyyaml_pkg: 'python3-pyyaml'              # PyYAML package for suricata-update. Install PyYAML(7), python3-pyyaml(8) for RHEL based OS 
+      python_pyyaml_pkg: 'python3-pyyaml'              # PyYAML package for suricata-update. Install PyYAML(7), python3-pyyaml(8) for RHEL based OS
       config_version: 'v50'                            # Sets config file version to use for v4x or v5x based on defaults for OS
      {% endif %}
     {% elif grains['os_family'] == 'Debian' %}
@@ -20,9 +20,9 @@ suricata:
       config_version: 'v50'                            # Sets config file version to use for v4x or v5x based on defaults for OS
     {% endif %}
       python_pip_cmd: 'python3 -m pip'                 # Use pip to install suricata-update
-      mode: 'af-packet'                                     # Set listen mode: pcap, nfqueue or af-packet
-      use_pfring: 'False'                                   # If pf_ring is installed set this to True
-      pfring_lb_procs: '2'                                  # Threads to run workers with. If set to 'auto' try CPU(core) count, otherwise RSS queue count
+      mode: 'af-packet'                                # Set listen mode: pcap, nfqueue or af-packet
+      use_pfring: 'False'                              # If pf_ring is installed set this to True
+      pfring_lb_procs: '2'                             # Threads to run workers with. If set to 'auto' try CPU(core) count, otherwise RSS queue count
     {% if grains['os_family'] == 'RedHat' %}
       user: 'suricata'                                      # Default user to run suricata as on RHEL based OS
       startup_overrides_path: '/etc/sysconfig/suricata'     # System overrides /etc/sysconfig or /etc/defaults depending on OS
@@ -32,7 +32,7 @@ suricata:
       service_file: 'suricata.init'                         # Using the oisf ppa requires some mods to the init file for setup
     {% endif %}
       address_groups:                                       # Set defaults for address groups
-        HOME_NET: '192.168.0.0/16,10.0.0.0/8,172.16.0.0/12' 
+        HOME_NET: '192.168.0.0/16,10.0.0.0/8,172.16.0.0/12'
         EXTERNAL_NET: '!$HOME_NET'
       use_suricata_update: 'True'                           # If using suricata-update for rule management
       use_suricata_update_cron: 'True'                      # If using suricata-update set cron to run daily
@@ -65,9 +65,9 @@ suricata:
         use_BPFconf: 'False'                   # Use Berkeley Packet Filter(BPF) on capture interfaces
         bpf_rules_file: 'capture-filter.bpf'   # Add custom BPF rules
       interfaces:
-        ip_binary_path: '/sbin/ip'             # path to ip binary for managing 
+        ip_binary_path: '/sbin/ip'             # path to ip binary for managing
         management: 'eth0'                     # Management interface name
-        capture: 
+        capture:
           enable: 'True'
           device_names: 'eth1'               # Capture interface name (currently only supports 1 interface)
           enable_tx: '0'                     # Enable tx send on this interface (default is 0)
