@@ -15,7 +15,7 @@
             missingok
             notifempty
             compress
-            create 640 {{ config.suricata.user }} {{ config.suricata.group }} 
+            create 640 {{ config.suricata.user }} {{ config.suricata.group }}
             sharedscripts
             postrotate
                 /bin/kill -HUP `cat /var/run/suricata.pid 2> /dev/null` 2> /dev/null || true

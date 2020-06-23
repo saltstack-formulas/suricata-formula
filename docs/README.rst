@@ -1,3 +1,5 @@
+.. _readme:
+
 suricata-formula
 ================
 
@@ -6,6 +8,11 @@ suricata-formula
 .. |img_travis| image:: https://travis-ci.com/saltstack-formulas/suricata-formula.svg?branch=master
       :alt: Travis CI Build Status
    :scale: 100%
+   :target: https://travis-ci.com/saltstack-formulas/suricata-formula
+.. |img_sr| image:: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+         :alt: Semantic Release
+   :scale: 100%
+   :target: https://github.com/semantic-release/semantic-release
 
 A saltstack formula to install suricata on RHEL or Ubuntu based systems.
 
@@ -31,19 +38,31 @@ https://github.com/saltstack-formulas/pfring-formula
 General notes
 -------------
 
-.. note::
+See the full `SaltStack Formulas installation and usage instructions
+<https://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html>`_.
 
-    The ``FORMULA`` file, contains information about the version of this formula, tested OS and OS families, and the minimum tested version of salt.
+If you are interested in writing or contributing to formulas, please pay attention to the `Writing Formula Section
+<https://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html#writing-formulas>`_.
 
-    See the full `Salt Formulas installation and usage instructions
-    <http://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html>`_.
+If you want to use this formula, please pay attention to the ``FORMULA`` file and/or ``git tag``,
+which contains the currently released version. This formula is versioned according to `Semantic Versioning <http://semver.org/>`_.
+
+See `Formula Versioning Section <https://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html#versioning>`_ for more details.
+
+If you need (non-default) configuration, please pay attention to the ``pillar.example`` file and/or `Special notes`_ section.
+
+Contributing
+------------
+
+**Commit message formatting is significant!!**
+
+Please see `How to contribute <https://github.com/saltstack-formulas/.github/blob/master/CONTRIBUTING.rst>`_ for more details.
 
 Available states
 ----------------
 
 .. contents::
     :local:
-
 
 ``suricata``
 ^^^^^^^^^^^^
