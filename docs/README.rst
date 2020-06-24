@@ -23,6 +23,8 @@ There is no such versioning weirdness with Ubuntu distros, which allow installin
 
 Supports one capture interface at the moment. Adding ability to control multiple capture interfaces is on the TODO list
 
+   Credit: formula created by `@alias454 <https://github.com/alias454>`_.
+
 .. contents:: **Table of Contents**
    :depth: 1
 
