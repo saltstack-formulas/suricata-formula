@@ -1,5 +1,5 @@
 name: suricata
-os: Ubuntu 18.04, CentOS7/8
+os: Ubuntu, CentOS
 os_family: Debian, RedHat
 version: 1.0.0
 release: 1
