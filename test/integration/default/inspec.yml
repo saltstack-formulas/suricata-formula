@@ -6,8 +6,7 @@ title: suricata formula
 maintainer: SaltStack Formulas
 license: Apache-2.0
 summary: Verify that the suricata formula is setup and configured correctly
-version: 1.0.0
 supports:
-  - platform-name: centos
   - platform-name: debian
   - platform-name: ubuntu
+  - platform-name: centos
