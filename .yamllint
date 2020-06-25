@@ -12,7 +12,9 @@ ignore: |
   node_modules/
   test/**/states/**/*.sls
   .kitchen/
-  suricata-update.yaml
+  suricata/files/suricata-update.yaml
+  test/salt/pillar/default.sls
+  pillar.example
 
 yaml-files:
   # Default settings
@@ -21,8 +23,8 @@ yaml-files:
   - .salt-lint
   - .yamllint
   # SaltStack Formulas additional settings
-  # - '*.example'
-  # - test/**/*.sls
+  - '*.example'
+  - test/**/*.sls
 
 rules:
   empty-values:
@@ -31,7 +33,7 @@ rules:
   line-length:
     # Increase from default of `80`
     # Based on https://github.com/PyCQA/flake8-bugbear#opinionated-warnings (`B950`)
-    max: 150
+    max: 88
   octal-values:
     forbid-implicit-octal: true
     forbid-explicit-octal: true

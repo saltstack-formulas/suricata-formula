@@ -8,8 +8,13 @@ driver:
   privileged: true
   run_command: /lib/systemd/systemd
 
+# Make sure the platforms listed below match up with
+# the `env.matrix` instances defined in `.travis.yml`
 platforms:
   ## SALT `master`
+  - name: ubuntu-2004-master-py3
+    driver:
+      image: saltimages/salt-master-py3:ubuntu-20.04
   - name: ubuntu-1804-master-py3
     driver:
       image: saltimages/salt-master-py3:ubuntu-18.04
@@ -17,7 +22,10 @@ platforms:
     driver:
       image: saltimages/salt-master-py3:centos-8
 
-  ## SALT '3001'
+  ## SALT `3001`
+  - name: ubuntu-2004-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:ubuntu-20.04
   - name: ubuntu-1804-3001-py3
     driver:
       image: saltimages/salt-3001-py3:ubuntu-18.04
@@ -38,11 +46,20 @@ platforms:
   - name: centos-7-3000-3-py3
     driver:
       image: saltimages/salt-3000.3-py3:centos-7
+  - name: ubuntu-1804-3000-3-py2
+    driver:
+      image: saltimages/salt-3000.3-py2:ubuntu-18.04
+  - name: ubuntu-1604-3000-3-py2
+    driver:
+      image: saltimages/salt-3000.3-py2:ubuntu-16.04
 
   ## SALT `2019.2`
   - name: ubuntu-1804-2019-2-py3
     driver:
       image: saltimages/salt-2019.2-py3:ubuntu-18.04
+  - name: ubuntu-1604-2019-2-py3
+    driver:
+      image: saltimages/salt-2019.2-py3:ubuntu-16.04
   - name: centos-8-2019-2-py3
     driver:
       image: saltimages/salt-2019.2-py3:centos-8
@@ -52,7 +69,7 @@ platforms:
 
 provisioner:
   name: salt_solo
-  log_level: info
+  log_level: debug
   salt_install: none
   require_chef: false
   formula: suricata
