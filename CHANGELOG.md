@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/saltstack-formulas/suricata-formula/compare/v1.0.0...v1.0.1) (2020-06-25)
+
+
+### Documentation
+
+* **readme:** update badges after repo transfer ([02ccfd2](https://github.com/saltstack-formulas/suricata-formula/commit/02ccfd2ad67fcb1aca1ca9e0adceb0a07176964f))
+
 # 1.0.0 (2020-06-23)
 
 
