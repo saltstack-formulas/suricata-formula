@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 # Override by OS
-if os.family == 'debian'
+case os.family
+when 'debian'
   file_name = '/etc/suricata/suricata.yaml'
   user = 'suricata'
   group = 'root'
   mode = '0640'
-elsif os.family == 'redhat'
+when 'redhat'
   file_name = '/etc/suricata/suricata.yaml'
   user = 'suricata'
   group = 'root'
