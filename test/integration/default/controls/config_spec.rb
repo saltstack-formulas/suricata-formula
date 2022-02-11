@@ -2,12 +2,7 @@
 
 # Override by OS
 case os.family
-when 'debian'
-  file_name = '/etc/suricata/suricata.yaml'
-  user = 'suricata'
-  group = 'root'
-  mode = '0640'
-when 'redhat'
+when 'debian', 'redhat'
   file_name = '/etc/suricata/suricata.yaml'
   user = 'suricata'
   group = 'root'
